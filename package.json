@@ -1,0 +1,47 @@
+{
+  "name": "products-raquel-store",
+  "version": "1.0.0",
+  "description": "system to control products for the store, I will make with S.O.L.I.D, TS and Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node --transpile-only --ignore-watch node_modules src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mtmozart/products-raquel-store-api.git"
+  },
+  "keywords": [
+    "node",
+    "typescript",
+    "solid"
+  ],
+  "author": "Matheus Mozart da Silva Neves Borges",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mtmozart/products-raquel-store-api/issues"
+  },
+  "homepage": "https://github.com/Mtmozart/products-raquel-store-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "nodemon": "^3.0.1",
+    "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "sucrase": "^3.34.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  }
+}
