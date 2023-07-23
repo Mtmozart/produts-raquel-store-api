@@ -1,9 +1,9 @@
-import { IUserRepository } from '../../repositories/IUserRepostiory';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 import { User } from '../../entities/User';
 
 export class CreateUserUseCase {
-  constructor(private usersRepository: IUserRepository) {}
+  constructor(private usersRepository: IUsersRepository) {}
 
   async execute(data: ICreateUserRequestDTO) {
     const userAlreadyExits = this.usersRepository.findByEmail(data.email);

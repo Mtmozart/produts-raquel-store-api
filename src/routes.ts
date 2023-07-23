@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import { createUserController } from './useCases/CreateUser';
 
 const router = Router();
 
-router.post('/', (request, response) => {
-  return response.status(201).send('deu certo'), console.log(201);
+router.post('/users', (request, response) => {
+  return createUserController.handle(request, response);
 });
 
 export { router };
