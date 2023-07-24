@@ -1,3 +1,9 @@
 import { app } from './app';
+const conn = require('../src/infra/database');
 
-app.listen(3333);
+conn
+  .sync()
+  .then(() => {
+    app.listen(3333);
+  })
+  .catch((err) => console.log(err));

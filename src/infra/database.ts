@@ -1,30 +1,22 @@
-import { config } from 'dotenv';
+require('dotenv').config();
 import { Sequelize } from 'sequelize';
-import { Response, Request } from 'express';
 
-config();
+const name = process.env.DB_NAME;
+const user = process.env.DB_NAME;
+const password = process.env.DB_PASSWORD;
+const host = process.env.DB_HOST;
+const dialect = process.env.DB_DIALECT;
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT as 'postgres',
-  },
-);
+const sequelize = new Sequelize(name, user, password, {
+  host: host,
+  dialect: dialect as 'postgres',
+});
 
-async function connectionForDatabase(req: Request, res: Response) {
-  try {
-    await sequelize.authenticate();
-    res.status(200).json('Conexão feita com sucesso');
-  } catch (error) {
-    console.error('Erro ao conectar ao banco de dados:', error);
-    res.status(500).json('Erro ao conectar ao banco de dados');
-  } finally {
-    await sequelize.close();
-    console.log('Conexão com o banco de dados encerrada.');
-  }
+try {
+  sequelize.authenticate();
+  console.log(`Conectamos com sucesso no banco de dados: ${name}`);
+} catch (err) {
+  console.log(err);
 }
 
-export default connectionForDatabase;
+export default sequelize;
