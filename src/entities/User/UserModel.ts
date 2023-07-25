@@ -1,18 +1,11 @@
-import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
-import sequelize from '../infra/database';
+import { DataTypes } from 'sequelize';
+import { User } from './User';
+import sequelize from '../../infra/database';
 import { uuid } from 'uuidv4';
 
-export class User extends Model {
-  private readonly id: string;
-  public name!: string;
-  public email!: string;
-  public password!: string;
-  public slug!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
+const UserModel = User;
 
-User.init(
+UserModel.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -47,7 +40,8 @@ User.init(
     timestamps: true,
     sequelize: sequelize,
     paranoid: true,
+    modelName: 'User',
   },
 );
 
-export default User;
+export default UserModel;
