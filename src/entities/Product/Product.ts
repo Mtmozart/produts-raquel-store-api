@@ -2,6 +2,7 @@ import { Model } from 'sequelize';
 
 export class Product extends Model {
   private readonly id: string;
+  public shipment: number;
   public name!: string;
   public entrance!: number;
   public sold!: number;

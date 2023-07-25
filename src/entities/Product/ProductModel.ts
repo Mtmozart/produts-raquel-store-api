@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import { Product } from './Product';
 import sequelize from '../../infra/database';
 import { uuid } from 'uuidv4';
+import UserModel from '../User/UserModel';
 
 const ProductModel = Product;
 
@@ -11,6 +12,10 @@ ProductModel.init(
       type: DataTypes.UUID,
       defaultValue: () => uuid(),
       primaryKey: true,
+    },
+    shipment: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
@@ -60,5 +65,9 @@ ProductModel.init(
     modelName: 'Product',
   },
 );
+
+ProductModel.belongsTo(UserModel, {
+  foreignKey: 'userId',
+});
 
 export default ProductModel;
