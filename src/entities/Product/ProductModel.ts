@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { Product } from './Product';
-import sequelize from '../../infra/database';
+import { sequelize } from '../../infra/database';
 import { uuid } from 'uuidv4';
 import UserModel from '../User/UserModel';
 

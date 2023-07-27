@@ -1,6 +1,6 @@
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
-import { User } from '../../entities/User';
+import { User } from '../../../src/entities/User/User';
 
 export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
@@ -12,7 +12,11 @@ export class CreateUserUseCase {
       throw new Error('Use already exists');
     }
 
-    const user = new User(data);
+    const user = new User({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
 
     await this.usersRepository.save(user);
   }

@@ -1,7 +1,7 @@
 import { app } from './app';
-const conn = require('../src/infra/database');
+import { sequelize } from '../src/infra/database';
 
-conn
+sequelize
   .sync()
   .then(() => {
     app.listen(3333);

@@ -14,9 +14,9 @@ const sequelize = new Sequelize(name, user, password, {
 
 try {
   sequelize.authenticate();
-  console.log(`Conectamos com sucesso no banco de dados: ${name}`);
+  console.log(`Conectamos com sucesso no banco de dados`);
 } catch (err) {
   console.log(err);
 }
 
-export default sequelize;
+export { sequelize };

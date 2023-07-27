@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
+import UserModel from '../../entities/User/UserModel';
 export class CreateUserController {
   constructor(private CreateUserUserUseCase: CreateUserUseCase) {}
   async handle(request: Request, response: Response): Promise<Response> {

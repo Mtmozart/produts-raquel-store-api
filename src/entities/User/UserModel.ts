@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { User } from './User';
-import sequelize from '../../infra/database';
+import { sequelize } from '../../infra/database';
 import { uuid } from 'uuidv4';
 import ProductModel from '../Product/ProductModel';
 import ProfitModel from '../Profit/ProfitModel';
@@ -47,10 +47,10 @@ UserModel.init(
 );
 
 User.hasMany(ProductModel, {
-  foreignKey: 'userId', // Nome da coluna que será a chave estrangeira na tabela de produtos
+  foreignKey: 'userId',
 });
 User.hasMany(ProfitModel, {
-  foreignKey: 'userId', // Nome da coluna que será a chave estrangeira na tabela de produtos
+  foreignKey: 'userId',
 });
 
 export default UserModel;
