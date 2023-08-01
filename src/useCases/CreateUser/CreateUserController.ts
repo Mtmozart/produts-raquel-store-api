@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
+import EmailValidator from '../../utils/EmailVerifications/verifyRegex';
 
 export class CreateUserController {
   constructor(private CreateUserUserUseCase: CreateUserUseCase) {}
@@ -7,6 +8,16 @@ export class CreateUserController {
     const { name, email, password } = request.body;
     const slugLowerCase: string = name.toLowerCase();
     const slug: string = slugLowerCase.replace(/ /g, '-');
+
+    const emailValidator = new EmailValidator(email);
+    if (
+      !emailValidator.isValidFormat() ||
+      !emailValidator.isValidDomain() ||
+      !emailValidator.isValidProvider() ||
+      !emailValidator.isSafeFromHtmlInjection()
+    ) {
+      return response.status(400).json({ message: 'Invalid email.' });
+    }
 
     try {
       await this.CreateUserUserUseCase.execute({
