@@ -66,8 +66,4 @@ ProductModel.init(
   },
 );
 
-ProductModel.belongsTo(UserModel, {
-  foreignKey: 'userId',
-});
-
 export default ProductModel;

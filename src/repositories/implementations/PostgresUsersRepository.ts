@@ -1,16 +1,19 @@
 import { IUsersRepository } from '../IUsersRepository';
 import { User } from '../../../src/entities/User/User';
+import UserModel from '../../../src/entities/User/UserModel';
 
 export class PostgresUsersRepository implements IUsersRepository {
-  private users: User[] = [];
-
-  async findByEmail(email: string): Promise<User> {
-    const user = this.users.find((user) => user.email === email);
-
-    return user;
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await UserModel.findOne({ where: { email: email } });
+    return user ? user.toJSON() : null;
   }
 
   async save(user: User): Promise<void> {
-    this.users.push(user);
+    await UserModel.create({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      slug: user.slug,
+    });
   }
 }

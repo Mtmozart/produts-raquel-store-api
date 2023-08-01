@@ -29,7 +29,6 @@ UserModel.init(
     slug: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -48,9 +47,12 @@ UserModel.init(
 
 User.hasMany(ProductModel, {
   foreignKey: 'userId',
+  onDelete: 'CASCADE',
 });
+
 User.hasMany(ProfitModel, {
   foreignKey: 'userId',
+  onDelete: 'CASCADE',
 });
 
 export default UserModel;

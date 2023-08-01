@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { Profit } from './Profits';
+import { Profit } from './Profit';
 import { sequelize } from '../../infra/database';
 import { uuid } from 'uuidv4';
 import UserModel from '../User/UserModel';
@@ -36,9 +36,5 @@ ProfitModel.init(
     modelName: 'User',
   },
 );
-
-ProfitModel.belongsTo(UserModel, {
-  foreignKey: 'userId',
-});
 
 export default ProfitModel;

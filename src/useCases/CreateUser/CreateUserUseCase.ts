@@ -6,18 +6,22 @@ export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute(data: ICreateUserRequestDTO) {
-    const userAlreadyExits = this.usersRepository.findByEmail(data.email);
+    const userAlreadyExits = await this.usersRepository.findByEmail(data.email);
 
     if (userAlreadyExits) {
-      throw new Error('Use already exists');
+      throw new Error('User already exits');
     }
+    try {
+      const user = new User({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        slug: data.slug,
+      });
 
-    const user = new User({
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    });
-
-    await this.usersRepository.save(user);
+      await this.usersRepository.save(user);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
