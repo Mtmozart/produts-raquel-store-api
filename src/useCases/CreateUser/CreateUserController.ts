@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import EmailValidator from '../../utils/EmailVerifications/verifyRegex';
+
+import EmailValidator from '../../utils/EmailVerifications/verifyEmail';
 
 export class CreateUserController {
   constructor(private CreateUserUserUseCase: CreateUserUseCase) {}
@@ -16,7 +17,9 @@ export class CreateUserController {
       !emailValidator.isValidProvider() ||
       !emailValidator.isSafeFromHtmlInjection()
     ) {
-      return response.status(400).json({ message: 'Invalid email.' });
+      return response.status(400).json({
+        message: 'Invalid email, please verify how you wrote the email.',
+      });
     }
 
     try {
