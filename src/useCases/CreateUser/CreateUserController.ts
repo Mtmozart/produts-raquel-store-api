@@ -12,6 +12,7 @@ export class CreateUserController {
 
     const emailVerifications = new EmailVerifications(email);
     if (
+      emailVerifications.isNull() ||
       !emailVerifications.isValidFormat() ||
       !emailVerifications.isValidDomain() ||
       !emailVerifications.isValidProvider() ||
@@ -23,6 +24,7 @@ export class CreateUserController {
     }
     const nameVerifications = new NameVerifications(name);
     if (
+      !nameVerifications.isNull() ||
       !nameVerifications.isValidFormat() ||
       !nameVerifications.isSafeFromHtmlInjection()
     ) {
