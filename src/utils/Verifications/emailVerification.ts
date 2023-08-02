@@ -1,5 +1,9 @@
-class EmailValidator {
-  constructor(private readonly email: string) {}
+import Verification from './verifications';
+
+class EmailVerifications extends Verification {
+  constructor(private readonly email: string) {
+    super(email);
+  }
 
   isValidFormat(): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,15 +28,9 @@ class EmailValidator {
     return emailDomains.some((domain) => emailDomain.includes(domain));
   }
 
-  isSafeFromHtmlInjection(): boolean {
-    const dangerousHtmlTags =
-      /<\s*script|iframe|object|embed|form|input|button|textarea|select|link/i;
-    return !dangerousHtmlTags.test(this.email);
-  }
-
   getEmail(): string {
     return this.email;
   }
 }
 
-export default EmailValidator;
+export default EmailVerifications;
