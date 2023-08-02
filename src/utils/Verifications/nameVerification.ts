@@ -7,7 +7,7 @@ class NameVerifications extends Verification {
 
   isValidFormat(): boolean {
     const nameRegex = /^[a-zA-Z\s]+$/;
-    return nameRegex.test(this.name);
+    return nameRegex.test(this.name.trim());
   }
   getName(): string {
     return this.name;
