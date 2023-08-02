@@ -6,7 +6,7 @@ class PasswordVerifications extends Verification {
   }
 
   hasMoreThanThreeChars(): boolean {
-    return this.password.length <= 3;
+    return this.password.length >= 3;
   }
 
   hasSpecialChars(): boolean {
@@ -14,13 +14,9 @@ class PasswordVerifications extends Verification {
     return specialCharsRegex.test(this.password);
   }
 
-  hasUppercase(): boolean {
-    const upperCaseRegex = /[a-z]/;
-    return upperCaseRegex.test(this.password);
-  }
-  hasLowercase(): boolean {
-    const lowerCaseRegex = /[a-z]/;
-    return lowerCaseRegex.test(this.password);
+  hasUppercaseAndLowercase(): boolean {
+    const uppercaseAndLowercaseRegex = /[a-zA-Z]/;
+    return uppercaseAndLowercaseRegex.test(this.password);
   }
 
   getPassword(): string {

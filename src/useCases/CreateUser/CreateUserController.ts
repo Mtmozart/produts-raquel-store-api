@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
 import { NameVerifications } from '../../utils/Verifications/nameVerification';
+import { PasswordVerifications } from '../../utils/Verifications/passwordVerifications';
 import EmailVerifications from '../../utils/Verifications/emailVerification';
 
 export class CreateUserController {
@@ -24,13 +25,27 @@ export class CreateUserController {
     }
     const nameVerifications = new NameVerifications(name);
     if (
-      !nameVerifications.isNull() ||
+      nameVerifications.isNull() ||
       !nameVerifications.isValidFormat() ||
       !nameVerifications.isSafeFromHtmlInjection()
     ) {
       return response.status(400).json({
         message:
           'Invalid characters found in the name. Please use only letter and spaces',
+      });
+    }
+
+    const passwordVerifications = new PasswordVerifications(password);
+    if (
+      passwordVerifications.isNull() ||
+      !passwordVerifications.hasMoreThanThreeChars() ||
+      !passwordVerifications.hasUppercaseAndLowercase() ||
+      !passwordVerifications.isSafeFromHtmlInjection() ||
+      !passwordVerifications.hasSpecialChars()
+    ) {
+      return response.status(400).json({
+        message:
+          'Please write the password using uppercase and lowercase letters, and special characters.',
       });
     }
 
