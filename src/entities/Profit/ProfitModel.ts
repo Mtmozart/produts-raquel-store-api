@@ -2,7 +2,6 @@ import { DataTypes } from 'sequelize';
 import { Profit } from './Profit';
 import { sequelize } from '../../infra/database';
 import { uuid } from 'uuidv4';
-import UserModel from '../User/UserModel';
 
 const ProfitModel = Profit;
 

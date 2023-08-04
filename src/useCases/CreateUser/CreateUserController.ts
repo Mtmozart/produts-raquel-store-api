@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import { NameVerifications } from '../../utils/Verifications/nameVerification';
-import { PasswordVerifications } from '../../utils/Verifications/passwordVerifications';
-import EmailVerifications from '../../utils/Verifications/emailVerification';
+import { ValidationServices } from '../../services/ValidationService';
+import { HashEncryption } from '../../services/Encryption';
 
 export class CreateUserController {
   constructor(private CreateUserUserUseCase: CreateUserUseCase) {}
@@ -11,49 +10,37 @@ export class CreateUserController {
     const slugLowerCase: string = name.toLowerCase();
     const slug: string = slugLowerCase.replace(/ /g, '-');
 
-    const emailVerifications = new EmailVerifications(email);
-    if (
-      emailVerifications.isNull() ||
-      !emailVerifications.isValidFormat() ||
-      !emailVerifications.isValidDomain() ||
-      !emailVerifications.isValidProvider() ||
-      !emailVerifications.isSafeFromHtmlInjection()
-    ) {
+    //novo tete de nome
+    const validationServices = new ValidationServices(name, email, password);
+
+    if (validationServices.isValidName(name) === false) {
+      return response.status(400).json({
+        message:
+          'Invalid characters found in the name. Please use only letter and spaces.',
+      });
+    }
+
+    if (validationServices.isValidEmail(name) === false) {
       return response.status(400).json({
         message: 'Invalid email, please verify how you wrote this email.',
       });
     }
-    const nameVerifications = new NameVerifications(name);
-    if (
-      nameVerifications.isNull() ||
-      !nameVerifications.isValidFormat() ||
-      !nameVerifications.isSafeFromHtmlInjection()
-    ) {
-      return response.status(400).json({
-        message:
-          'Invalid characters found in the name. Please use only letter and spaces',
-      });
-    }
-
-    const passwordVerifications = new PasswordVerifications(password);
-    if (
-      passwordVerifications.isNull() ||
-      !passwordVerifications.hasMoreThanThreeChars() ||
-      !passwordVerifications.hasUppercaseAndLowercase() ||
-      !passwordVerifications.isSafeFromHtmlInjection() ||
-      !passwordVerifications.hasSpecialChars()
-    ) {
+    if (validationServices.isValidPassword(password) === false) {
       return response.status(400).json({
         message:
           'Please write the password using uppercase and lowercase letters, and special characters.',
       });
     }
 
+    const hashencryption = new HashEncryption();
+
+    const hashedPassword = hashencryption.encryptedPassword(password);
+
     try {
       await this.CreateUserUserUseCase.execute({
         name,
         email,
-        password,
+        password: hashedPassword,
         slug,
       });
 
