@@ -14,7 +14,6 @@ export class CreateUserUseCase {
       throw new Error('User already exits');
     }
 
-    //novo tete de nome
     const validationServices = new ValidationServices(
       data.name,
       data.email,
@@ -36,9 +35,9 @@ export class CreateUserUseCase {
       );
     }
 
-    const hashencryption = new HashEncryption();
+    const hashEncryption = new HashEncryption();
 
-    const hashedPassword = hashencryption.encryptedPassword(data.password);
+    const hashedPassword = hashEncryption.encryptedPassword(data.password);
 
     try {
       const user = new User({

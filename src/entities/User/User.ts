@@ -8,4 +8,8 @@ export class User extends Model {
   public slug!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public getId(): string {
+    return this.id;
+  }
 }
