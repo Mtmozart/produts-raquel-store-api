@@ -18,19 +18,18 @@ class CreateUserTokenUseCase {
       );
     }
 
-    const id = userExists.getId;
-
     const token = jwt.sign(
       {
         name: data.name,
-        id: id,
+        id: userExists.getId,
       },
       secret,
     );
     try {
       return {
         token: token,
-        userId: id,
+        userId: userExists.getId,
+        exp: Math.floor(Date.now() / 1000) + 60 * 60,
       };
     } catch (error) {
       throw new Error(
