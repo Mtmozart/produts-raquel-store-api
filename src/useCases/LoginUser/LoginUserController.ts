@@ -1,31 +1,27 @@
 import { Request, Response } from 'express';
-import { CreateUserUseCase } from './CreateUserUseCase';
+import { LoginUserUseCase } from './LoginUserUseCase';
 import { CreateUserTokenUseCase } from '../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
 
-export class CreateUserController {
+export class LoginUserController {
   constructor(
-    private CreateUserUserUseCase: CreateUserUseCase,
+    private loginUserUserUseCase: LoginUserUseCase,
     private createUserTokenUseCase: CreateUserTokenUseCase,
   ) {}
+
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, email, password } = request.body;
-    const slugLowerCase: string = name.toLowerCase();
-    const slug: string = slugLowerCase.replace(/ /g, '-');
+    const email = request.body.email;
+    const password = request.body.password;
 
     try {
-      const user = await this.CreateUserUserUseCase.execute({
-        name,
+      const user = this.loginUserUserUseCase.execute({
         email,
         password,
-        slug,
       });
-
       const token = await this.createUserTokenUseCase.execute({
         email,
       });
-
       return response.status(201).json({
-        message: 'User created successfully',
+        message: 'Login successfully',
         user: user,
         token: token,
       });

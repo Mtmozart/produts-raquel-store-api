@@ -6,7 +6,7 @@ class ValidationServices {
   private nameVerifications: NameVerifications;
   private emailVerifications: EmailVerifications;
   private passwordVerifications: PasswordVerifications;
-  constructor(name: string, email: string, password: string) {
+  constructor(name?: string, email?: string, password?: string) {
     this.nameVerifications = new NameVerifications(name);
     this.emailVerifications = new EmailVerifications(email);
     this.passwordVerifications = new PasswordVerifications(password);

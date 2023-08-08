@@ -8,10 +8,7 @@ class CreateUserTokenUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute(data: ICreateUserTokenDTO) {
-    const userExists = await this.usersRepository.findByEmailAndName(
-      data.name,
-      data.email,
-    );
+    const userExists = await this.usersRepository.findByEmail(data.email);
     if (!userExists) {
       throw new Error(
         'We have a problem with creating tokens. Please return after.',
@@ -20,15 +17,21 @@ class CreateUserTokenUseCase {
 
     const token = jwt.sign(
       {
-        name: data.name,
+        email: data.email,
         id: userExists.getId,
       },
       secret,
     );
     try {
+      const User = {
+        name: userExists.name,
+        email: userExists.email,
+        id: userExists.getId,
+      };
+
       return {
         token: token,
-        userId: userExists.getId,
+        user: User,
         exp: Math.floor(Date.now() / 1000) + 60 * 60,
       };
     } catch (error) {

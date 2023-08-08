@@ -5,12 +5,11 @@ class CreateUserTokenController {
   constructor(private createUserTokenUseCase: CreateUserTokenUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, email } = request.body;
+    const { email } = request.body;
     const userId = request.userId;
 
     try {
       const token = await this.createUserTokenUseCase.execute({
-        name,
         email,
       });
 

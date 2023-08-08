@@ -4,7 +4,9 @@ import UserModel from '../../../src/entities/User/UserModel';
 
 export class PostgresUsersRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<User | null> {
-    const user = await UserModel.findOne({ where: { email: email } });
+    const user = await UserModel.findOne({
+      where: { email: email },
+    });
     return user ? user.toJSON() : null;
   }
   async findByEmailAndName(name: string, email: string): Promise<User | null> {

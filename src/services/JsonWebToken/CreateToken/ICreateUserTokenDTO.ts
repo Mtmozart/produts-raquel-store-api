@@ -1,4 +1,5 @@
 export interface ICreateUserTokenDTO {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
+  password?: string;
 }

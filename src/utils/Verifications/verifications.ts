@@ -2,7 +2,7 @@ class Verification {
   constructor(private readonly input: string) {}
 
   isNull(): boolean {
-    return this.input.length === 0;
+    return this.input === undefined || this.input.length === 0;
   }
 
   isSafeFromHtmlInjection(): boolean {

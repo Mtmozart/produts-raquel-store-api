@@ -25,7 +25,7 @@ export class CreateUserUseCase {
         'Invalid characters found in the name. Please use only letter and spaces.',
       );
     }
-    if (validationServices.isValidEmail(data.name) === false) {
+    if (validationServices.isValidEmail(data.email) === false) {
       throw new Error('Invalid email, please verify how you wrote this email.');
     }
 
