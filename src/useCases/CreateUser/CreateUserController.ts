@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import { CreateUserTokenUseCase } from '../../services/JsonWebToken/CreateUserTokenUseCase';
+import { CreateUserTokenUseCase } from '../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
 
 export class CreateUserController {
   constructor(

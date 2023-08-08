@@ -1,4 +1,4 @@
-import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { IUsersRepository } from '../../../repositories/IUsersRepository';
 import { ICreateUserTokenDTO } from './ICreateUserTokenDTO';
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
