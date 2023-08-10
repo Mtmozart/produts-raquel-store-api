@@ -1,11 +1,11 @@
 import { IUsersRepository } from '../../../repositories/IUsersRepository';
-import { ICreateUserTokenDTO } from './ICreateUserTokenDTO';
-import { User } from '../../../entities/User/User';
+import { ICreateUserTokenDTO } from './ICheckUserTokenDTO';
+
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const secret = process.env.SECRET;
 
-class CreateUserTokenUseCase {
+class CheckUserTokenUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute(data: ICreateUserTokenDTO) {
@@ -39,4 +39,4 @@ class CreateUserTokenUseCase {
   }
 }
 
-export { CreateUserTokenUseCase };
+export { CheckUserTokenUseCase };

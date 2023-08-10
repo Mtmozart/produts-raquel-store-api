@@ -15,6 +15,12 @@ export class PostgresUsersRepository implements IUsersRepository {
     });
     return user ? user.toJSON() : null;
   }
+  async findById(id: string): Promise<User | null> {
+    const user = await UserModel.findOne({
+      where: { id: id },
+    });
+    return user ? user.toJSON() : null;
+  }
 
   async save(user: User): Promise<void> {
     await UserModel.create({
