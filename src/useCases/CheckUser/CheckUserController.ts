@@ -5,14 +5,16 @@ class CheckUserController {
   constructor(private checkUserUseCase: CheckUserUseCase) {}
 
   async handle(request: Request, response: Response) {
+    let currentUser = await this.checkUserUseCase.execute(request);
+
     try {
-      let currentUser = await this.checkUserUseCase.execute(request);
       if (currentUser !== null) {
         return response.status(201).json({
           message: 'User checked',
           user: currentUser,
         });
       }
+
       return response.status(403).json({
         message: 'Denied access',
       });

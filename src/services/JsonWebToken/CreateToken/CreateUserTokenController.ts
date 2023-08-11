@@ -11,7 +11,6 @@ class CreateUserTokenController {
       const data = await this.createUserTokenUseCase.execute({
         email,
       });
-
       return response.status(200).json(data);
     } catch (error) {
       return response.status(500).json({ error: error.message });

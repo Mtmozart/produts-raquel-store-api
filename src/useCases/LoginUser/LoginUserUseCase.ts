@@ -8,6 +8,7 @@ export class LoginUserUseCase {
 
   async execute(data: ILoginUserDTO) {
     const userExists = await this.userRepository.findByEmail(data.email);
+
     const validationServices = new ValidationServices(
       data.email,
       data.password,

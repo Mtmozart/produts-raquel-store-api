@@ -17,13 +17,18 @@ export class LoginUserController {
         email,
         password,
       });
-      const token = await this.createUserTokenUseCase.execute({
-        email,
-      });
-      return response.status(201).json({
-        message: 'Login successfully',
-        user: token.user,
-        token: token.token,
+      if (user) {
+        const token = await this.createUserTokenUseCase.execute({
+          email,
+        });
+        return response.status(201).json({
+          message: 'Login successfully',
+          user: token.user,
+          token: token.token,
+        });
+      }
+      return response.status(500).json({
+        message: 'Login problem, please, refresh the page',
       });
     } catch (err) {
       return response.status(500).json({
