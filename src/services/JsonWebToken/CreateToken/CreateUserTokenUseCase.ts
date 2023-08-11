@@ -1,6 +1,6 @@
 import { IUsersRepository } from '../../../repositories/IUsersRepository';
 import { ICreateUserTokenDTO } from './ICreateUserTokenDTO';
-import { User } from '../../../entities/User/User';
+
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const secret = process.env.SECRET;
@@ -15,19 +15,17 @@ class CreateUserTokenUseCase {
         'We have a problem with creating tokens. Please return after.',
       );
     }
-    const userId = userExists.getId();
 
     const token = jwt.sign(
       {
         email: data.email,
-        id: userId,
       },
       secret,
     );
+
     try {
-      console.log(userId);
       return {
-        token: token,
+        token,
         user: userExists,
         exp: Math.floor(Date.now() / 1000) + 60 * 60,
       };

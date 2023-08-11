@@ -7,9 +7,14 @@ class CheckUserController {
   async handle(request: Request, response: Response) {
     try {
       let currentUser = await this.checkUserUseCase.execute(request);
-      return response.status(201).json({
-        message: 'User checked',
-        user: currentUser,
+      if (currentUser !== null) {
+        return response.status(201).json({
+          message: 'User checked',
+          user: currentUser,
+        });
+      }
+      return response.status(403).json({
+        message: 'Denied access',
       });
     } catch (err) {
       return response.status(500).json({

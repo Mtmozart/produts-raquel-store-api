@@ -6,14 +6,13 @@ class CreateUserTokenController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const { email } = request.body;
-    const userId = request.userId;
 
     try {
-      const token = await this.createUserTokenUseCase.execute({
+      const data = await this.createUserTokenUseCase.execute({
         email,
       });
 
-      return response.status(200).json(token);
+      return response.status(200).json(data);
     } catch (error) {
       return response.status(500).json({ error: error.message });
     }

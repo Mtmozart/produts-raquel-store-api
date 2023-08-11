@@ -22,8 +22,8 @@ export class LoginUserController {
       });
       return response.status(201).json({
         message: 'Login successfully',
-        user: user,
-        token: token,
+        user: token.user,
+        token: token.token,
       });
     } catch (err) {
       return response.status(500).json({
