@@ -23,7 +23,6 @@ export class LoginUserController {
         });
         return response.status(201).json({
           message: 'Login successfully',
-          user: token.user,
           token: token.token,
         });
       }

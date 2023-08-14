@@ -15,8 +15,9 @@ class CheckUserUseCase {
     let currentUser;
 
     if (token !== null) {
-      const decoded = jwt.verify(token, secret);
-      const id = decoded.id;
+      const decoded = jwt.verify(token.token, secret);
+
+      const id = decoded.userExists.id;
       currentUser = await this.usersRepository.findById(id);
       currentUser.password = undefined;
     } else {

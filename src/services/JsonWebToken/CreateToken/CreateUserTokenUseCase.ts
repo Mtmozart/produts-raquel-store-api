@@ -15,10 +15,9 @@ class CreateUserTokenUseCase {
         'We have a problem with creating tokens. Please return after.',
       );
     }
-
     const token = jwt.sign(
       {
-        email: data.email,
+        userExists,
       },
       secret,
     );
@@ -26,7 +25,6 @@ class CreateUserTokenUseCase {
     try {
       return {
         token,
-        user: userExists,
         exp: Math.floor(Date.now() / 1000) + 60 * 60,
       };
     } catch (error) {

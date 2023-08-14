@@ -1,7 +1,7 @@
 import { Model } from 'sequelize';
 
 export class User extends Model {
-  private readonly id: string;
+  private readonly id!: string;
   public name!: string;
   public email!: string;
   public password!: string;
