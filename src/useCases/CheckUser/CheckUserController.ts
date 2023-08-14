@@ -8,13 +8,13 @@ class CheckUserController {
     let currentUser = await this.checkUserUseCase.execute(request);
 
     try {
-      if (currentUser !== null) {
+      if (currentUser !== null && currentUser !== undefined) {
         return response.status(201).json({
           message: 'User checked',
           user: currentUser,
         });
       }
-
+      console.log('current user aqui', currentUser);
       return response.status(403).json({
         message: 'Denied access',
       });

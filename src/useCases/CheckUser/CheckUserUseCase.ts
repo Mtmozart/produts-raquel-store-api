@@ -14,14 +14,14 @@ class CheckUserUseCase {
 
     let currentUser;
 
-    if (token !== null) {
+    if (token !== null && token !== undefined) {
       const decoded = jwt.verify(token.token, secret);
-
       const id = decoded.userExists.id;
       currentUser = await this.usersRepository.findById(id);
       currentUser.password = undefined;
+      return currentUser;
     } else {
-      currentUser = null;
+      return (currentUser = null);
     }
   }
 }
