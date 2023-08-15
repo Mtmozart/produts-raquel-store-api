@@ -7,6 +7,12 @@ class CheckUserController {
   async handle(request: Request, response: Response) {
     let currentUser = await this.checkUserUseCase.execute(request);
 
+    if (!currentUser) {
+      return response.status(422).json({
+        message: 'The provided authentication token is invalid or expired.',
+      });
+    }
+
     try {
       if (currentUser !== null && currentUser !== undefined) {
         return response.status(201).json({
