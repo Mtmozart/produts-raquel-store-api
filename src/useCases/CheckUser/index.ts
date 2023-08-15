@@ -1,6 +1,6 @@
 import { PostgresUsersRepository } from '../../repositories/implementations/PostgresUsersRepository';
 import { CheckUserUseCase } from './CheckUserUseCase';
-import { CheckUserController } from './CheckUserController';
+import { CheckUserController } from './CheckTokenController';
 
 const postgresUsersRepository = new PostgresUsersRepository();
 

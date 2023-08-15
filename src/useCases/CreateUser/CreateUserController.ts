@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
 import { CreateUserTokenUseCase } from '../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
+import { uuid } from 'uuidv4';
 
 export class CreateUserController {
   constructor(
@@ -10,7 +11,7 @@ export class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, email, password } = request.body;
     const slugLowerCase: string = name.toLowerCase();
-    const slug: string = slugLowerCase.replace(/ /g, '-');
+    const slug: string = slugLowerCase.replace(/ /g, '-') + uuid();
 
     try {
       const user = await this.CreateUserUserUseCase.execute({

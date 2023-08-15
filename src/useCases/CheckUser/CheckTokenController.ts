@@ -15,12 +15,8 @@ class CheckUserController {
 
     try {
       if (currentUser !== null && currentUser !== undefined) {
-        return response.status(201).json({
-          message: 'User checked',
-          user: currentUser,
-        });
+        return response.status(200).send(currentUser);
       }
-      console.log('current user aqui', currentUser);
       return response.status(403).json({
         message: 'Denied access',
       });
