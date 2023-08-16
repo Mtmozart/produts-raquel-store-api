@@ -36,4 +36,16 @@ export class PostgresUsersRepository implements IUsersRepository {
       slug: user.slug,
     });
   }
+
+  async update(user: User): Promise<void> {
+    await UserModel.update(
+      {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        slug: user.slug,
+      },
+      { where: { id: user.getId() } },
+    );
+  }
 }

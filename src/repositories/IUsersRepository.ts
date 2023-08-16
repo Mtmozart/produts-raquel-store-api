@@ -5,4 +5,5 @@ export interface IUsersRepository {
   findById(id: string);
   findBySlug(slug: string);
   save(user: User): Promise<void>;
+  update(user: User): Promise<void>;
 }
