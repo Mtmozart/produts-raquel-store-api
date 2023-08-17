@@ -1,11 +1,10 @@
 import { GetToken } from '../GetToken/GetToken';
-import { IVerifyToken } from './IVerifyTokenDTO';
-
+import { IVerifyTokenIdDTO } from './IVerifyTokenIdDTO';
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 
-class VerifyToken {
-  public token: IVerifyToken;
+class VerifyTokenId {
+  public token: IVerifyTokenIdDTO;
 
   execute = async (req, res, next) => {
     if (!req.headers.authorization)
@@ -19,7 +18,7 @@ class VerifyToken {
     if (!token || typeof token !== 'string') {
       return res.status(401).json({ message: 'Incompatible token' });
     }
-    console.log();
+
     try {
       const verified = jwt.verify(token, secret);
       req.user = verified;
@@ -30,4 +29,4 @@ class VerifyToken {
   };
 }
 
-export { VerifyToken };
+export { VerifyTokenId };
