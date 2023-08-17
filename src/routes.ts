@@ -5,6 +5,9 @@ import { checkUserController } from './useCases/CheckUser';
 import { checkUserByIdController } from './useCases/CheckUserById';
 import { updateUserController } from './useCases/UpdateUser';
 
+//Middleware
+import { verifyToken } from './services/JsonWebToken/VerifyToken';
+
 const router = Router();
 
 router.post('/users/create', (request, response) => {
@@ -16,7 +19,7 @@ router.post('/users/login', (request, response) => {
 router.get('/users/checkuser', (request, response) => {
   return checkUserController.handle(request, response);
 });
-router.get('/users/:slug', (request, response) => {
+router.get('/users/:slug', verifyToken.execute, (request, response) => {
   return checkUserByIdController.handle(request, response);
 });
 router.patch('/users/edit/:slug', (request, response) => {
