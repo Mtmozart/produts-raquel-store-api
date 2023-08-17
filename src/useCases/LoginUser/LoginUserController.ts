@@ -26,7 +26,7 @@ export class LoginUserController {
           token: token.token,
         });
       }
-      return response.status(500).json({
+      return response.status(401).json({
         message: 'Login problem, please, refresh the page',
       });
     } catch (err) {

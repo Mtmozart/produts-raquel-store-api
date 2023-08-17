@@ -10,8 +10,7 @@ export class CreateUserController {
   ) {}
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, email, password } = request.body;
-    const slugLowerCase: string = name.toLowerCase();
-    const slug: string = slugLowerCase.replace(/ /g, '-') + uuid();
+    const slug: string = uuid();
 
     try {
       const user = await this.CreateUserUserUseCase.execute({

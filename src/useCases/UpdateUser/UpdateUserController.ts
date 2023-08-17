@@ -10,8 +10,6 @@ class UpdateUserController {
   ) {}
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, email, password } = request.body;
-    const slugLowerCase: string = name.toLowerCase();
-    const newSlug: string = slugLowerCase.replace(/ /g, '-') + uuid();
     const { slug } = request.params;
 
     try {
@@ -24,14 +22,16 @@ class UpdateUserController {
         email,
         name,
         password,
-        slug: newSlug,
+        slug: slug,
       });
       return response.status(201).json({
         message: 'User updated successfully',
         user: user,
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      return response.status(501).json({
+        message: err.message || 'Unexpected error.',
+      });
     }
   }
 }

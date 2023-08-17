@@ -10,9 +10,15 @@ class UpdateUserUseCase {
 
   async execute(data: IUpdateUserRequestDTO) {
     const updateUser = await this.usersRepository.findById(data.id);
-    console.log(updateUser);
+
     if (!updateUser) {
       throw new Error('Danied acess');
+    }
+    const verifyIfEmailExists = await this.usersRepository.findByEmail(
+      data.email,
+    );
+    if (verifyIfEmailExists && verifyIfEmailExists != updateUser.email) {
+      throw new Error('The e-mail already utilised by auther user');
     }
     const validationServices = new ValidationServices(
       data.name,
