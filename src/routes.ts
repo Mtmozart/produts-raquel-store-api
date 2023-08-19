@@ -22,7 +22,7 @@ router.get('/users/checkuser', (request, response) => {
 router.get('/users/:slug', verifyToken.execute, (request, response) => {
   return checkUserByIdController.handle(request, response);
 });
-router.patch('/users/edit/:slug', (request, response) => {
+router.patch('/users/edit/:slug', verifyToken.execute, (request, response) => {
   return updateUserController.handle(request, response);
 });
 

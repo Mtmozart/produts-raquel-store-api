@@ -1,4 +1,3 @@
-import { Request, response } from 'express';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { IUpdateUserRequestDTO } from './UpdateUserDTO';
 import { User } from '../../../src/entities/User/User';
@@ -10,15 +9,16 @@ class UpdateUserUseCase {
 
   async execute(data: IUpdateUserRequestDTO) {
     const updateUser = await this.usersRepository.findById(data.id);
-
+    //checked if user exits
     if (!updateUser) {
-      throw new Error('Danied acess');
+      throw new Error('Denied access');
     }
+    //Execute the logics for securties
     const verifyIfEmailExists = await this.usersRepository.findByEmail(
       data.email,
     );
     if (verifyIfEmailExists && verifyIfEmailExists != updateUser.email) {
-      throw new Error('The e-mail already utilised by auther user');
+      throw new Error('The email already have used by other user');
     }
     const validationServices = new ValidationServices(
       data.name,
