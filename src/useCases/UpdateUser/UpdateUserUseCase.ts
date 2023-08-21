@@ -13,11 +13,11 @@ class UpdateUserUseCase {
     if (!updateUser) {
       throw new Error('Denied access');
     }
-    //Execute the logics for securties
+    //Execute the logics for securities
     const verifyIfEmailExists = await this.usersRepository.findByEmail(
       data.email,
     );
-    if (verifyIfEmailExists && verifyIfEmailExists != updateUser.email) {
+    if (verifyIfEmailExists && verifyIfEmailExists.email != updateUser.email) {
       throw new Error('The email already have used by other user');
     }
     const validationServices = new ValidationServices(

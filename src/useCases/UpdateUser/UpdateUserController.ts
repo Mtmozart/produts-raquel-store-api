@@ -1,6 +1,7 @@
 import { UpdateUserUseCase } from './UpdateUserUseCase';
 import { Request, Response } from 'express';
 import { CheckUserByIdUseCase } from '../CheckUserById/CheckUserByIdUseCase';
+import { checkUserByIdController } from '../CheckUserById';
 
 class UpdateUserController {
   constructor(
@@ -17,21 +18,21 @@ class UpdateUserController {
       const userParam = await this.checkUserByIdUseCase.execute({
         slug,
       });
-      console.log(userParam);
 
-      // Atualiza o usuário
-      const user = await this.updateUserUseCase.execute({
-        id: userParam.id,
-        email,
-        name,
-        password,
-        slug: slug,
-      });
+      if (userParam !== undefined || userParam !== null) {
+        const user = await this.updateUserUseCase.execute({
+          id: userParam.id,
+          email,
+          name,
+          password,
+          slug: slug,
+        });
 
-      return response.status(201).json({
-        message: 'User updated successfully',
-        user: user,
-      });
+        return response.status(201).json({
+          message: 'User updated successfully',
+          user: user,
+        });
+      }
     } catch (err) {
       return response.status(404).json({
         message: err.message || 'Unexpected error.',

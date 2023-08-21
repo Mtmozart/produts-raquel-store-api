@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { CheckUserByIdUseCase } from './CheckUserByIdUseCase';
-import { VerifyTokenId } from '../../services/JsonWebToken/VerifyTokenId/VerifyTokenId';
 
 class CheckUserByIdController {
   constructor(private checkUserByIdUseCase: CheckUserByIdUseCase) {}
@@ -9,13 +8,8 @@ class CheckUserByIdController {
     const { slug } = request.params;
 
     try {
-      const verifyTokenId = new VerifyTokenId();
-      const userToken = await verifyTokenId.execute(request, response);
-      const tokenId = userToken.userExists.id;
-
       const user = await this.checkUserByIdUseCase.execute({
         slug: slug,
-        tokenId: tokenId,
       });
 
       if (user === null || user === undefined) {

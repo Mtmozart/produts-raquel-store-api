@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import { GetToken } from '../GetToken/GetToken';
 import { IVerifyTokenIdDTO } from './IVerifyTokenIdDTO';
 
