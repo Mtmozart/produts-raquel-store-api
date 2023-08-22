@@ -8,9 +8,9 @@ class VerifyTokenId {
   public token: IVerifyTokenIdDTO;
 
   execute = async (req, res) => {
-    if (!req.headers.authorization)
+    if (!req.headers.authorization) {
       return res.status(401).json({ message: 'Denied access!' });
-
+    }
     const getToken = new GetToken();
     const requestToken = await getToken.handle(req);
     const secret = process.env.SECRET;

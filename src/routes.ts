@@ -7,6 +7,7 @@ import { updateUserController } from './useCases/UpdateUser';
 
 //Middleware
 import { verifyToken } from './services/JsonWebToken/VerifyToken';
+import { verifyTokenIdM } from './utils/Middleware/CheckUserByIdMiddleware';
 
 const router = Router();
 
@@ -22,8 +23,12 @@ router.get('/users/checkuser', (request, response) => {
 router.get('/users/:slug', verifyToken.execute, (request, response) => {
   return checkUserByIdController.handle(request, response);
 });
-router.patch('/users/edit/:slug', verifyToken.execute, (request, response) => {
-  return updateUserController.handle(request, response);
-});
+router.patch(
+  '/users/edit/:slug',
+  verifyTokenIdM.execute,
+  (request, response) => {
+    return updateUserController.handle(request, response);
+  },
+);
 
 export { router };
