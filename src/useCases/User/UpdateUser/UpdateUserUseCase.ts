@@ -1,8 +1,8 @@
-import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { IUsersRepository } from '../../../repositories/IUsersRepository';
 import { IUpdateUserRequestDTO } from './UpdateUserDTO';
-import { User } from '../../../src/entities/User/User';
-import { ValidationServices } from '../../services/ValidationService';
-import { HashEncryption } from '../../services/Encryption';
+import { User } from '../../../../src/entities/User/User';
+import { ValidationServices } from '../../../services/ValidationService';
+import { HashEncryption } from '../../../services/Encryption';
 
 class UpdateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}

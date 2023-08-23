@@ -1,4 +1,4 @@
-import { PostgresUsersRepository } from '../../repositories/implementations/PostgresUsersRepository';
+import { PostgresUsersRepository } from '../../../repositories/implementations/PostgresUsersRepository';
 import { UpdateUserUseCase } from './UpdateUserUseCase';
 import { UpdateUserController } from './UpdateUserController';
 import { CheckUserByIdUseCase } from '../CheckUserById/CheckUserByIdUseCase';

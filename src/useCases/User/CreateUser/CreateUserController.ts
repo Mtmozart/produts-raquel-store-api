@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import { CreateUserTokenUseCase } from '../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
+import { CreateUserTokenUseCase } from '../../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
 import { uuid } from 'uuidv4';
 
 export class CreateUserController {

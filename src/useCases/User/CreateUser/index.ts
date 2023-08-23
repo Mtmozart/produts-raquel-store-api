@@ -1,7 +1,7 @@
-import { PostgresUsersRepository } from '../../repositories/implementations/PostgresUsersRepository';
+import { PostgresUsersRepository } from '../../../repositories/implementations/PostgresUsersRepository';
 import { CreateUserController } from './CreateUserController';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import { CreateUserTokenUseCase } from '../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
+import { CreateUserTokenUseCase } from '../../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
 
 const postgresUsersRepository = new PostgresUsersRepository();
 

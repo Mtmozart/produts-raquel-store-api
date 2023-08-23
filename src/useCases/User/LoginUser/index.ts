@@ -1,5 +1,5 @@
-import { PostgresUsersRepository } from '../../repositories/implementations/PostgresUsersRepository';
-import { CreateUserTokenUseCase } from '../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
+import { PostgresUsersRepository } from '../../../repositories/implementations/PostgresUsersRepository';
+import { CreateUserTokenUseCase } from '../../../services/JsonWebToken/CreateToken/CreateUserTokenUseCase';
 import { LoginUserController } from './LoginUserController';
 import { LoginUserUseCase } from './LoginUserUseCase';
 

@@ -1,5 +1,5 @@
-import { ValidationServices } from '../../services/ValidationService';
-import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { ValidationServices } from '../../../services/ValidationService';
+import { IUsersRepository } from '../../../repositories/IUsersRepository';
 import { ILoginUserDTO } from './ILoginUserDTO';
 const bcrypt = require('bcryptjs');
 

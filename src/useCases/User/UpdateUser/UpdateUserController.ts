@@ -1,7 +1,6 @@
 import { UpdateUserUseCase } from './UpdateUserUseCase';
 import { Request, Response } from 'express';
 import { CheckUserByIdUseCase } from '../CheckUserById/CheckUserByIdUseCase';
-import { checkUserByIdController } from '../CheckUserById';
 
 class UpdateUserController {
   constructor(
