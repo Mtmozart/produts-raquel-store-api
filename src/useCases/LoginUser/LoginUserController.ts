@@ -13,21 +13,18 @@ export class LoginUserController {
     const password = request.body.password;
 
     try {
-      const user = this.loginUserUserUseCase.execute({
+      const user = await this.loginUserUserUseCase.execute({
         email,
         password,
       });
-      if (user) {
-        const token = await this.createUserTokenUseCase.execute({
-          email,
-        });
-        return response.status(201).json({
-          message: 'Login successfully',
-          token: token.token,
-        });
-      }
-      return response.status(401).json({
-        message: 'Login problem, please, refresh the page',
+
+      const token = await this.createUserTokenUseCase.execute({
+        email,
+      });
+
+      return response.status(201).json({
+        message: 'Login successfully',
+        token: token.token,
       });
     } catch (err) {
       return response.status(500).json({
