@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { createUserController } from './useCases/CreateUser';
-import { loginUserController } from './useCases/LoginUser';
-import { checkUserController } from './useCases/CheckUser';
-import { checkUserByIdController } from './useCases/CheckUserById';
-import { updateUserController } from './useCases/UpdateUser';
+import { createUserController } from './useCases/User/CreateUser';
+import { loginUserController } from './useCases/User/LoginUser';
+import { checkUserController } from './useCases/User/CheckUser';
+import { checkUserByIdController } from './useCases/User/CheckUserById';
+import { updateUserController } from './useCases/User/UpdateUser';
 
 //Middleware
 import { verifyToken } from './services/JsonWebToken/VerifyToken';

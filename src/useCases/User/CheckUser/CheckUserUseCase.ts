@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { GetToken } from '../../services/JsonWebToken/GetToken/GetToken';
-import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { GetToken } from '../../../services/JsonWebToken/GetToken/GetToken';
+import { IUsersRepository } from '../../../repositories/IUsersRepository';
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 
