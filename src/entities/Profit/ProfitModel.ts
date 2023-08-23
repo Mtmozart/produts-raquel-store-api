@@ -32,7 +32,7 @@ ProfitModel.init(
     timestamps: true,
     sequelize: sequelize,
     paranoid: true,
-    modelName: 'User',
+    modelName: 'Profit',
   },
 );
 
