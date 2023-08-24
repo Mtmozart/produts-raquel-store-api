@@ -8,12 +8,6 @@ export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute(data: ICreateUserRequestDTO) {
-    const userAlreadyExits = await this.usersRepository.findByEmail(data.email);
-
-    if (userAlreadyExits) {
-      throw new Error('User already exits');
-    }
-
     const validationServices = new ValidationServices(
       data.name,
       data.email,
@@ -34,7 +28,11 @@ export class CreateUserUseCase {
         'Please write the password using uppercase and lowercase letters, and special characters.',
       );
     }
+    const userAlreadyExits = await this.usersRepository.findByEmail(data.email);
 
+    if (userAlreadyExits) {
+      throw new Error('User already exits');
+    }
     const hashEncryption = new HashEncryption();
 
     const hashedPassword = hashEncryption.encryptedPassword(data.password);
