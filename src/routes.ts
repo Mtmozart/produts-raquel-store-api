@@ -4,13 +4,15 @@ import { loginUserController } from './useCases/User/LoginUser';
 import { checkUserController } from './useCases/User/CheckUser';
 import { checkUserByIdController } from './useCases/User/CheckUserById';
 import { updateUserController } from './useCases/User/UpdateUser';
+//products
+import { createProductController } from './useCases/Products/CreateProduct';
 
 //Middleware
 import { verifyToken } from './services/JsonWebToken/VerifyToken';
 import { verifyTokenIdM } from './utils/Middleware/CheckUserByIdMiddleware';
 
 const router = Router();
-
+//userRoutes
 router.post('/users/create', (request, response) => {
   return createUserController.handle(request, response);
 });
@@ -28,6 +30,15 @@ router.patch(
   verifyTokenIdM.execute,
   (request, response) => {
     return updateUserController.handle(request, response);
+  },
+);
+
+//Products Routes
+router.post(
+  '/product/:slug/create',
+  verifyTokenIdM.execute,
+  (request, response) => {
+    return createProductController.handle(request, response);
   },
 );
 

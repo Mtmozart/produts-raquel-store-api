@@ -1,10 +1,10 @@
 import { Product } from '../../../entities/Product/Product';
-import { IProducsRepository } from '../../../repositories/IProductsRepository';
+import { IProductsRepository } from '../../../repositories/IProductsRepository';
 import { ValidationServices } from '../../../services/ValidationService';
 import { ICreateProductDTO } from './ICreateProductDTO';
 
 class CreateProductUseCase {
-  constructor(producRepository: IProducsRepository) {}
+  constructor(private productRepository: IProductsRepository) {}
 
   async execute(data: ICreateProductDTO) {
     const validation = new ValidationServices(data.name);
@@ -28,6 +28,8 @@ class CreateProductUseCase {
         stockValue: data.stockValue,
         userId: data.userId,
       });
+
+      await this.productRepository.save(product);
     } catch (error) {
       throw new Error(error);
     }
