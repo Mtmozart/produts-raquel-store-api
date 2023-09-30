@@ -5,7 +5,6 @@ export interface ICreateProductDTO {
   sold: number;
   stock: number;
   price: number;
-  stockValue: number;
   percentage: number;
   slug: string;
   userId: string;

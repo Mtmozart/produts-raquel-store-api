@@ -8,7 +8,6 @@ export class Product extends Model {
   public sold!: number;
   public stock!: number;
   public price!: number;
-  public stockValue!: number;
   public percentage!: number;
   public slug!: string;
   public readonly createdAt!: Date;

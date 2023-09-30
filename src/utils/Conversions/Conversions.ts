@@ -1,14 +1,14 @@
 import { IConversionDTO } from './IConversionDTO';
-class numbersTransform {
+class Conversion {
   numberInter(data: IConversionDTO) {
-    const number = Number.isInteger(data.number);
+    const number = parseInt(data.value);
     return number;
   }
 
   realNumbers(data: IConversionDTO) {
-    const number = parseFloat(data.number);
+    const number = parseFloat(data.value);
     return number;
   }
 }
 
-export { numbersTransform };
+export { Conversion };

@@ -1,7 +1,8 @@
 import { Product } from '../../../entities/Product/Product';
 import { IProductsRepository } from '../../../repositories/IProductsRepository';
-import { ValidationServices } from '../../../services/ValidationService';
 import { ICreateProductDTO } from './ICreateProductDTO';
+//service
+import { ValidationServices } from '../../../services/ValidationService';
 
 class CreateProductUseCase {
   constructor(private productRepository: IProductsRepository) {}
@@ -25,15 +26,14 @@ class CreateProductUseCase {
         slug: data.slug,
         sold: data.sold,
         stock: data.stock,
-        stockValue: data.stockValue,
         userId: data.userId,
       });
+      //console.log(product.entrance);
 
       await this.productRepository.save(product);
-    } catch (error) {
-      throw new Error(error);
+    } catch (err) {
+      throw new Error(err);
     }
   }
 }
-
 export { CreateProductUseCase };

@@ -1,3 +1,3 @@
 export interface IConversionDTO {
-  number: string;
+  value: string;
 }

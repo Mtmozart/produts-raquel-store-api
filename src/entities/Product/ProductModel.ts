@@ -20,7 +20,7 @@ ProductModel.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    entrace: {
+    entrance: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -36,12 +36,8 @@ ProductModel.init(
       type: DataTypes.DECIMAL(8, 2),
       allowNull: false,
     },
-    stockValue: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-    },
     percentage: {
-      type: DataTypes.DECIMAL(3, 2),
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
 
