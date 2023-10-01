@@ -33,7 +33,7 @@ ProductModel.init(
       allowNull: false,
     },
     price: {
-      type: DataTypes.DECIMAL(8, 2),
+      type: DataTypes.FLOAT(4, 2),
       allowNull: false,
     },
     percentage: {

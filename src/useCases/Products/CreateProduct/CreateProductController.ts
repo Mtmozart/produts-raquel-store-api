@@ -19,11 +19,12 @@ class CreateProductController extends Conversion {
 
     //this is conversions
     const percentageValue = this.numberInter({ value: percentage });
-    const entranceValue = this.realNumbers({ value: entrance });
-    const priceValue = this.numberInter({ value: price });
-    const shipmentValue = this.realNumbers({ value: shipment });
-    const soldValue = this.realNumbers({ value: sold });
-    const stockValue = this.realNumbers({ value: stock });
+    const entranceValue = this.numberInter({ value: entrance });
+    const priceValue = this.realNumbers({ value: price });
+    const shipmentValue = this.numberInter({ value: shipment });
+    const soldValue = this.numberInter({ value: sold });
+    const stockValue = this.numberInter({ value: stock });
+    console.log('valor: ', priceValue);
 
     try {
       const verifyTokenId = new VerifyTokenId();

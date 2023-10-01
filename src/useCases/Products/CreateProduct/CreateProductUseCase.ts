@@ -28,7 +28,6 @@ class CreateProductUseCase {
         stock: data.stock,
         userId: data.userId,
       });
-      //console.log(product.entrance);
 
       await this.productRepository.save(product);
     } catch (err) {
