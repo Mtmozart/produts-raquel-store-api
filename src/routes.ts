@@ -6,10 +6,12 @@ import { checkUserByIdController } from './useCases/User/CheckUserById';
 import { updateUserController } from './useCases/User/UpdateUser';
 //products
 import { createProductController } from './useCases/Products/CreateProduct';
+import { checkProductByIdController } from './useCases/Products/CheckProductById';
 
 //Middleware
 import { verifyToken } from './services/JsonWebToken/VerifyToken';
 import { verifyTokenIdM } from './utils/Middleware/CheckUserByIdMiddleware';
+import { verifyTokenId } from './services/JsonWebToken/VerifyTokenId';
 
 const router = Router();
 //userRoutes
@@ -41,5 +43,9 @@ router.post(
     return createProductController.handle(request, response);
   },
 );
+
+router.get('/product/:slug', verifyTokenId.execute, (request, response) => {
+  return checkProductByIdController.handle(request, response);
+});
 
 export { router };
