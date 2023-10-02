@@ -44,7 +44,7 @@ router.post(
   },
 );
 
-router.get('/product/:slug', verifyTokenId.execute, (request, response) => {
+router.get('/product/:slug', (request, response) => {
   return checkProductByIdController.handle(request, response);
 });
 

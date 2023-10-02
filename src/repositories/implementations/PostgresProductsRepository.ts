@@ -19,6 +19,7 @@ export class PostgresProductsRepository implements IProductsRepository {
     const product = await ProductModel.findOne({
       where: { slug: slug },
     });
+
     return product;
   }
 }

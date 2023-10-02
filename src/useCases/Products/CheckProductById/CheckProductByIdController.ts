@@ -6,9 +6,10 @@ class CheckProductByIdController {
     const { slug } = request.params;
 
     try {
-      const product = this.checkProductByIdUseCase.execute({
+      const product = await this.checkProductByIdUseCase.execute({
         slug: slug,
       });
+
       if (product === null || product === undefined) {
         return response.status(422).json({ message: 'User not found!' });
       }
