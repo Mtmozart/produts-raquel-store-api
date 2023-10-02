@@ -13,6 +13,7 @@ export class PostgresProductsRepository implements IProductsRepository {
       price: product.price,
       percentage: product.percentage,
       slug: product.slug,
+      userId: product.userId,
     });
   }
   async findProductById(slug: string): Promise<Product | null> {

@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateProductUseCase } from './CreateProductUseCase';
+//User
+import { CheckUserByIdController } from '../../User/CheckUserById/CheckUserByIdController';
 import { uuid } from 'uuidv4';
 //Utils
 import { Conversion } from '../../../utils/Conversions/Conversions';
@@ -14,8 +16,8 @@ class CreateProductController extends Conversion {
   async handle(request: Request, response: Response): Promise<Response> {
     const { entrance, name, percentage, price, shipment, sold, stock } =
       request.body;
-
-    const slug = name.toLowerCase().replace(/\s+/g, '-') + '-' + uuid();
+    const { slug } = request.params;
+    const slugProduct = name.toLowerCase().replace(/\s+/g, '-') + '-' + uuid();
 
     //this is conversions
     const percentageValue = this.numberInter({ value: percentage });
@@ -24,12 +26,12 @@ class CreateProductController extends Conversion {
     const shipmentValue = this.numberInter({ value: shipment });
     const soldValue = this.numberInter({ value: sold });
     const stockValue = this.numberInter({ value: stock });
-    console.log('valor: ', priceValue);
 
     try {
       const verifyTokenId = new VerifyTokenId();
       const user = await verifyTokenId.execute(request, response);
       const id = user.userExists.id;
+      console.log('Esse é o id', id);
 
       const product = await this.createProduct.execute({
         entrance: entranceValue,
@@ -37,7 +39,7 @@ class CreateProductController extends Conversion {
         percentage: percentageValue,
         price: priceValue,
         shipment: shipmentValue,
-        slug,
+        slug: slugProduct,
         sold: soldValue,
         stock: stockValue,
         userId: id,

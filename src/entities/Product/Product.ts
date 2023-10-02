@@ -10,6 +10,7 @@ export class Product extends Model {
   public price!: number;
   public percentage!: number;
   public slug!: string;
+  public userId!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
