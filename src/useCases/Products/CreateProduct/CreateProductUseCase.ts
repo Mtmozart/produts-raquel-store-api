@@ -30,6 +30,7 @@ class CreateProductUseCase {
       });
 
       await this.productRepository.save(product);
+      return product;
     } catch (err) {
       throw new Error(err);
     }

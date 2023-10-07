@@ -23,4 +23,10 @@ export class PostgresProductsRepository implements IProductsRepository {
 
     return product;
   }
+
+  async findAllByUser(userId: string): Promise<Product[] | null> {
+    const products = await ProductModel.findAll({ where: { userId: userId } });
+
+    return products;
+  }
 }
